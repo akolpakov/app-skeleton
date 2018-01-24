@@ -29,7 +29,6 @@ function log(req, res, opt) {
 
 const webpackConfig = {
     context: __dirname,
-    contentBase: __dirname,
     entry: './src/app.js',
     devtool: 'source-map',
     output: {
@@ -42,18 +41,18 @@ const webpackConfig = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'stage-0', 'react'],
                 },
             },
             {
                 test: /\.css$/,
-                loader: 'style!css',
+                loader: 'style-loader!css-loader',
             },
             {
                 test: /\.scss$/,
-                loader: 'style!css!sass',
+                loader: 'style-loader!css-loader!sass-loader',
             },
         ],
     },
@@ -64,8 +63,8 @@ const webpackConfig = {
         },
     },
     devServer: {
+        contentBase: __dirname,
         progress: true,
-        colors: true,
         port: 8081,
         inline: true,
         compress: true,
